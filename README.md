@@ -1,0 +1,1 @@
+Deve conter a explicação de como configurar o ambiente e rodar o projeto.
