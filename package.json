@@ -1,0 +1,10 @@
+{
+  "name": "arretech-app",
+  "version": "1.0.0",
+  "description": "Desafio Omnichannel - Projeto Final Luiza Code - Grupo 1",
+  "main": "index.js",
+  "repository": "https://github.com/a-mandaflores/ArreTech.git",
+  "author": "Grupo 1",
+  "license": "MIT",
+  "private": false
+}
