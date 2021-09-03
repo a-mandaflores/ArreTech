@@ -1,10 +1,19 @@
 {
   "name": "arretech-app",
   "version": "1.0.0",
-  "description": "Desafio Omnichannel - Projeto Final Luiza Code - Grupo 1",
+  "description": "Desafio Omnichannel - Projeto Final Luiza Code 3a edicao - Grupo 1",
   "main": "index.js",
   "repository": "https://github.com/a-mandaflores/ArreTech.git",
   "author": "Grupo 1",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
 }
