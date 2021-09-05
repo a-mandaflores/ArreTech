@@ -3,6 +3,8 @@
 const express = require('express') 
 //cria a instancia do express
 const app = express() 
+//definindo porta do servidor
+const PORT = 9090
 
 //conectar o banco de dados com o mongoose
 //const db = require('./src/data/database')
@@ -14,4 +16,6 @@ app.use(express.json())
 //usar as rotas
 
 //subindo o servidor
-app.listen(9090, ()=> console.log('Servidor em pleno funcionamento'))    
+app.listen(PORT, ()=> console.log(`Servidor em pleno funcionamento na porta ${PORT}`))
+
+module.exports = app
