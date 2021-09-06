@@ -1,5 +1,8 @@
 // importa express
 const express = require('express') 
+
+//para buscar a conexão com o mysql (arquivo database.js)
+const db = require('./src/data/database')
 //cria a instancia do express
 const app = express() 
 //definindo porta do servidor
