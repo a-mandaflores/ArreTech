@@ -1,19 +1,16 @@
 {
-  "name": "arretech-app",
+  "name": "ArreTech-TYPEORM",
   "version": "1.0.0",
-  "description": "Desafio Omnichannel - Projeto Final Luiza Code 3a edicao - Grupo 1",
   "main": "index.js",
-  "repository": "https://github.com/a-mandaflores/ArreTech.git",
-  "author": "Grupo 1",
   "license": "MIT",
-  "private": false,
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon src/server.js",
+    "typeorm": "node-dev node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "express": "^4.17.1",
     "mysql2": "^2.3.0",
-    "mysql2-promise": "^0.1.4"
+    "typeorm": "^0.2.37"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
