@@ -7,6 +7,10 @@
     "database": "db_teste",
     "synchronize": true,
     "entities": ["./src/entities/**.js"],
-    "repositories": ["./src/repositories/**.js"]
-
+    "repositories": ["./src/repositories/**.js"],
+    "migrations": ["./src/data/migrations/**.js"],
+    "cli":{
+        "entities": "./src/entities",
+        "migrationsDir":"./src/data/migrations"
+    }
 }
