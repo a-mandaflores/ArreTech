@@ -1,4 +1,5 @@
 const user = require('../controllers/userController');
+
 const  createProduct  = require('../controllers/productController');
 
 const express = require('express');
