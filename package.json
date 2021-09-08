@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "typeorm": "node-dev node_modules/typeorm/cli.js"
+    "typeorm": "node node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "express": "^4.17.1",
