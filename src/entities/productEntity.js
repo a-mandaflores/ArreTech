@@ -11,11 +11,17 @@ module.exports = new EntitySchema({
         },
         name: {
             type: "varchar",
-            length: 15
+            length: 15,
+            require: true
         },
         description: {
             type: "varchar",
             length: 30
+        },
+        price: {
+            type: "varchar",
+            length: 30,
+            require: true
         }
 
     }

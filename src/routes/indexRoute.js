@@ -1,6 +1,7 @@
 const user = require('../controllers/userController');
 
-const  createProduct  = require('../controllers/productController');
+const Store = require('../controllers/storeController')
+const Product = require('../controllers/productController')
 
 const express = require('express');
 
@@ -10,6 +11,13 @@ routes.use(express.json());
 
 routes.post('/user', user.create);//Criar cliente
 routes.get('/user', user.list); //rota de teste -> vou apagar
+
+routes.post('/product', Product.createProduct);//Crear produto
+routes.get('/product', Product.listProduct);//Listar produto
+
+routes.get('/store', Store.listStore);
+
+
 
 /*
 routes.post('/addProduct/:user_id')//Adicionar produtos na lista de clientes
