@@ -1,22 +1,18 @@
-// const conn = require('../data/databaseIndex');
-// const Shop = require('../entities/shopEntity');
+const conn = require('../data/databaseIndex');
+const tbStore = require('../entities/storeEntity');
+const { all } = require('../routes/indexRoute');
 
 
-// //listar lojas
-// const listShop = async (req, res) => {
-
-//     try {
-//         const allShops = await conn.getRepository(tbShops).find();
-
-//         res.status(200).json({ data: allShops });   
+//listar lojas
+const listStore = async (req, res) => {
+    try {
         
-//     } catch (error) {
-//         const
+        const allStore = await conn.getRepository(tbStore).find(all);
+        return res.status(200).json({ data: allStore });   
         
-//     }
+    } catch (error) {
+        return res.status(400).send(error);        
+    } 
+}
 
-    
-    
-    
-
-// }
+module.exports = {listStore}
