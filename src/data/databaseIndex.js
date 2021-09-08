@@ -1,25 +1,5 @@
-require('').config()
 const createConnection = require('typeorm');
-const optionEnv = process.env.DATABASE_URL
-const conexao = connect()
 
-//conectar o banco de dados 
-async function connect(){
-    if(global.connection && global.connection.state !== 'disconnected')
-        return global.connection;
-
-    const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection("process.env.DATABASE_URL");
-    console.log("Conectou no MySQL!");
-    global.connection = connection;
-    return connection;
-}
-
-module.exports = conn;
-
-//
-
-/*
 try{
     createConnection.createConnection();
     //return conn;
@@ -29,11 +9,3 @@ try{
 }
 
 module.exports = createConnection;
-
-/*
-const conn = require('typeorm');
-
-conn.createConnection();
-console.log("Me conectei ao MYSQL!!")
-
-*/
