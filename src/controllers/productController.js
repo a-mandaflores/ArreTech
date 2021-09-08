@@ -1,5 +1,5 @@
-const conn = require('../database/index')
-const Product = require('../entities/Product')
+const conn = require('../data/databaseIndex')
+const Product = require('../entities/productEntity')
 
 const createProduct = async (req, res) => {
 

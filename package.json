@@ -1,7 +1,7 @@
 {
   "name": "ArreTech-TYPEORM",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js",
@@ -11,8 +11,10 @@
     "express": "^4.17.1",
     "mysql2": "^2.3.0",
     "typeorm": "^0.2.37"
+   
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "dotenv": "^8.2.0"
   }
 }

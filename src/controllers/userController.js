@@ -1,5 +1,5 @@
-const conn = require('../database/index');
-const User = require('../entities/User');
+const conn = require('../data/databaseIndex');
+const User = require('../entities/userEntity');
 
 
 //const {req, res} = require('express');

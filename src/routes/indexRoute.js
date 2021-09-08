@@ -1,5 +1,5 @@
-const {create, list} = require('./controllers/UserController');
-const  createProduct  = require('./controllers/ProductController');
+const {create, list} = require('../controllers/userController');
+const  createProduct  = require('../controllers/productController');
 
 const Router = require('express')
 

@@ -1,6 +1,7 @@
-require('dotenv').config()
+require('').config()
 const createConnection = require('typeorm');
 const optionEnv = process.env.DATABASE_URL
+const conexao = connect()
 
 //conectar o banco de dados 
 async function connect(){
@@ -14,7 +15,9 @@ async function connect(){
     return connection;
 }
 
-//const conexao = connect()
+module.exports = conn;
+
+//
 
 /*
 try{
@@ -33,4 +36,4 @@ const conn = require('typeorm');
 conn.createConnection();
 console.log("Me conectei ao MYSQL!!")
 
-module.exports = conn;*/
+*/
