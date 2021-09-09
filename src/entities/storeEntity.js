@@ -20,6 +20,11 @@ module.exports = new EntitySchema({
         state: {
             type: "varchar",
             length: 30
+        },
+        manager: {
+            type: "varchar",
+            length: 30,
+            nullable: false
         }
     }
 });
