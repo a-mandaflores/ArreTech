@@ -1,8 +1,8 @@
 var EntitySchema = require("typeorm").EntitySchema;
 
 module.exports = new EntitySchema({
-    name: "Order", //nome da entidade, e por default nome da tabela no bd
-    tableName: "tb_orders", //redefinindo o nome da tabela no bd
+    name: "OrderItem", //nome da entidade, e por default nome da tabela no bd
+    tableName: "tb_order_items", //redefinindo o nome da tabela no bd
     columns: {
         id: {
             primary: true,
@@ -14,11 +14,18 @@ module.exports = new EntitySchema({
         }
     },
     relations: {
-        user: {
-            target: "User", // CategoryEntity
+        order: {
+            target: "Order", // OrderEntity
+            type: "many-to-one",
+            joinTable: true,
+            cascade: true
+        },
+        product :{
+            target: "Product",
             type: "many-to-one",
             joinTable: true,
             cascade: true
         }
+
     }
 });
