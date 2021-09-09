@@ -10,6 +10,7 @@ require('./src/data/databaseIndex');
 
 const app = express();
 
+
 app.use(routes);
 
 app.use(express.json()); //informa para usar requisições e responses em formato Json

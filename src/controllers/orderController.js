@@ -1,4 +1,5 @@
 const conn = require('../data/databaseIndex')
+
 //const Order = require('../entities/orderEntity')
 //const Order = require('../entities/orderItemEntity')
 
@@ -13,3 +14,4 @@ const createProduct = async (req, res) => {
 }
 
 module.exports = createProduct;
+

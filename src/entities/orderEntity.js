@@ -1,3 +1,4 @@
+
 var EntitySchema = require("typeorm").EntitySchema;
 
 module.exports = new EntitySchema({

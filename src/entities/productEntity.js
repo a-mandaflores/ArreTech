@@ -26,6 +26,8 @@ module.exports = new EntitySchema({
         price: {
             type: "float",
             nullable: false
+            length: 15,
+            require: true
         }
     }
 });
