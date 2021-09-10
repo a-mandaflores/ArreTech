@@ -18,8 +18,16 @@ module.exports = new EntitySchema({
         user: {
             target: "User", // CategoryEntity
             type: "many-to-one",
-            joinTable: true,
+            joinColumn: true,
             cascade: true
+            //eager: true não esta funcionando o uso 
+        }, 
+        items : {
+            target: "OrderItem",
+            type: "one-to-many",
+            inverseSide: "order", //inverSide especifica um alias que é associado a coluna orderId da tb_order_items
+            cascade: true //cascade deve estar do lado One, para que ao salvar uma nova ordem salve automaticamente os items
+            //eager: true   
         }
     }
 });
