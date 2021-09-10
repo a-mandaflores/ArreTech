@@ -1,17 +1,17 @@
 const conn = require('../data/databaseIndex')
+const Order = require('../entities/orderEntity')
 
-//const Order = require('../entities/orderEntity')
-//const Order = require('../entities/orderItemEntity')
+const createOrder = async (req, res) => {
 
+    const { price, user, items } = req.body;
 
-const createProduct = async (req, res) => {
+    var data = { price, user, items };
 
-    const { name, description } = req.body;
+     await conn.getRepository(Order).save(data);
 
-    var newProduct = await conn.getRepository(Product).save(req.body);
-
-    return res.status(201).json({data: newProduct});
+    res.status(201).json({data: data});
 }
 
-module.exports = createProduct;
+
+module.exports = { createOrder }  
 

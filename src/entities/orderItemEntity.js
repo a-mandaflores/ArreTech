@@ -17,15 +17,16 @@ module.exports = new EntitySchema({
         order: {
             target: "Order", // OrderEntity
             type: "many-to-one",
-            joinTable: true,
-            cascade: true
-        },
+            joinColumn: true,
+            //cascade: true,
+            //eager:true
+        }/*,
         product :{
             target: "Product",
             type: "many-to-one",
-            joinTable: true,
+            joinColumn: true,
             cascade: true
-        }
+        }*/
 
     }
 });

@@ -1,7 +1,8 @@
 const user = require('../controllers/userController');
-
-const Store = require('../controllers/storeController')
-const Product = require('../controllers/productController')
+const store = require('../controllers/storeController')
+const product = require('../controllers/productController')
+const order = require('../controllers/orderController')
+const orderItem = require('../controllers/orderItemController')
 
 const express = require('express');
 
@@ -9,25 +10,27 @@ const routes = express();
 
 routes.use(express.json());
 
-routes.post('/user', user.create);//Criar cliente
+routes.post('/user', user.create);//Criar cliente Ok
 routes.get('/user', user.list); //rota de teste -> vou apagar
 
-routes.post('/product', Product.createProduct);//Crear produto ---> será apagada, usar migration
-routes.get('/product', Product.listProduct);//Listar produto
+routes.post('/product', product.createProduct);//Criar produto ---> será apagada, usar migration
+routes.get('/product', product.listProduct);//Listar produto Ok
 
-routes.get('/store', Store.listStore);
+routes.get('/store', store.listStore); //Listar lojas Ok
 
+routes.post('/order', order.createOrder); //Esta criando 1 order e adicionado os itens - OK
 
+routes.post('/item', orderItem.addItem);
 
+routes.get('/order/:userId', user.listOrdersUser); //Listar pedidos de um cliente Ok --> usando Query Builder
+
+routes.delete('/item/:itemId', orderItem.deleteItem);
 /*
-routes.post('/addProduct/:user_id')//Adicionar produtos na lista de clientes
-routes.delete('/removeProduct/:user_id')//Remover produto da lista de clientes
-routes.get('/listProduct')//Consultar todos os produtos disponiveis
+routes.post('/addProduct/:user_id')//Adicionar produtos na lista de pedido de um cliente
+routes.delete('/removeProduct/:user_id')//Remover produto da lista de pedido de um cliente
 
 routes.post('/checkout/:user_id')//Finalizar compras
-routes.get('/userHistory/:user_id')//Consultar a lista de compras do cliente
 
-routes.get('/listShop')//Listar lojas
 */
 
 module.exports = routes;
