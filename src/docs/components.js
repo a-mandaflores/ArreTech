@@ -1,6 +1,6 @@
 const apicomponents = {
     components: {
-        schemas:{
+        schemas: {
             User: {
                 type: "object",
                 properties: {
@@ -13,30 +13,64 @@ const apicomponents = {
                         types: "string",
                         description: "Email do usuario a ser criado",
                         example: "amanda@gmail.com"
-                    }  
-                    
+                    }
+
                 }
-                                   
+
             },
-            
-            UserList:{
-                type: "array",
+            Store: {
+                type: "object",
                 properties: {
                     name: {
                         types: "string",
-                        description: "Nome do usuario a ser criado",
-                        example: "Amanda"
+                        description: "Nome da loja",
+                        //example: "Tv 40° polegadas"
                     },
-                    email: {
+                    city: {
                         types: "string",
-                        description: "Email do usuario a ser criado",
-                        example: "amanda@gmail.com"
-                    }  
+                        description: "Cidade",
+                       // example: "Televizão 40 polegadas"
+                    },
+                    state: {
+                        types: "string",
+                        description: "Estado",
+                        //example: "Magazine Luiza"
+                    },
+                    manager: {
+                        types: "string",
+                        description: "Gerente",
+                        //example: "1.200"
+                    }
+
+                }
+            },
+            Product:{
+                type: "object",
+                properties: {
+                    name: {
+                        types: "string",
+                        description: "Nome do produto",
+                        example: "Tv 40° polegadas"
+                    },
+                    description: {
+                        types: "string",
+                        description: "Descrição do produto",
+                        example: "Televizão 40 polegadas"
+                    },
+                    producer: {
+                        types: "string",
+                        description: "Fabricante do produto",
+                        example: "Magazine Luiza"
+                    },
+                    price: {
+                        types: "string",
+                        description: "Preço do produto",
+                        example: "1.200"
+                    }   
                     
                 }
             }
         }
-
     }
 
 }

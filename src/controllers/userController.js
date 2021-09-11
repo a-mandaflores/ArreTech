@@ -15,8 +15,7 @@ const create = async (req, res) => {
         var newUser = await conn.getRepository(User).save(newUser);
         
         res.status(201).json({ data: newUser });
-        console.log('Creando usuário')
-        
+        //console.log('Creando usuário')
 
 
     } catch (err) {

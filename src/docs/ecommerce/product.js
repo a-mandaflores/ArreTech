@@ -1,16 +1,16 @@
-const storeList = {
+const product = {
     get:{
-        operationId: "storeList",
-        description: "Listar lojas",
-        tags: ["Stores"],
+        operationId: "productList",
+        description: "Listar produtos",
+        tags: ["Product"],
         parameters: [],
         responses: {
             200: {  
-            description: "Listar todos os usuarios",
+            description: "Ok",
                 content: {
                     "Aplication/Json":{
                         schema:{
-                            $ref: "#/components/schemas/UserList"
+                            $ref: "#/components/schemas/Product"
                         }
                     }
 
@@ -20,4 +20,4 @@ const storeList = {
     },
 }
 
-module.exports = storeList
+module.exports = product

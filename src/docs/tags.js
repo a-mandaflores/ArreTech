@@ -1,9 +1,12 @@
 const tags = [
       {
-        name: "Users"
+        name: "User"
       },
       {
-        name: "Stores"
+        name: "Store"
+      },
+      {
+        name: "Product"
       }
 ]
 
