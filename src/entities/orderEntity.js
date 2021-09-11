@@ -10,8 +10,8 @@ module.exports = new EntitySchema({
             type: "int",
             generated: true
         },
-        price: {
-        type: "double"
+        amount: {
+            type: "double"
         }
     },
     relations: {
@@ -19,10 +19,10 @@ module.exports = new EntitySchema({
             target: "User", // CategoryEntity
             type: "many-to-one",
             joinColumn: true,
-            cascade: true
+            //cascade: true
             //eager: true não esta funcionando o uso 
-        }, 
-        items : {
+        },
+        items: {
             target: "OrderItem",
             type: "one-to-many",
             inverseSide: "order", //inverSide especifica um alias que é associado a coluna orderId da tb_order_items

@@ -2,7 +2,6 @@ const user = require('../controllers/userController');
 const store = require('../controllers/storeController')
 const product = require('../controllers/productController')
 const order = require('../controllers/orderController')
-const orderItem = require('../controllers/orderItemController')
 
 const express = require('express');
 
@@ -18,18 +17,18 @@ routes.get('/product', product.listProduct);//Listar produto Ok
 
 routes.get('/store', store.listStore); //Listar lojas Ok
 
-routes.post('/order', order.createOrder); //Esta criando 1 order e adicionado os itens - OK
+routes.post('/order', order.createOrder); //FINALIZAR COMPRAR Esta criando 1 order e adicionado os itens - OK
 
-routes.post('/item', orderItem.addItem);
+routes.post('/order/item', order.addItem);//Adicionar produtos na lista de pedido de um cliente
 
-routes.get('/order/:userId', user.listOrdersUser); //Listar pedidos de um cliente Ok --> usando Query Builder
+routes.delete('/order/item/:productId', order.removeItem);//Remover produto da lista de pedido de um cliente
 
-routes.delete('/item/:itemId', orderItem.deleteItem);
+routes.get('/order/user/:userId', user.listOrdersUser); //Listar pedidos de um cliente Ok --> usando Query Builder
+
+
 /*
-routes.post('/addProduct/:user_id')//Adicionar produtos na lista de pedido de um cliente
-routes.delete('/removeProduct/:user_id')//Remover produto da lista de pedido de um cliente
-
-routes.post('/checkout/:user_id')//Finalizar compras
+routes.post('/checkout/:orderId')//Finalizar compra - talvez criar tabela payment com relação 1 para 1 com 
+tabela order e setar status, amount, id_endereço de entregaUser, id_endereço de entrega Loja
 
 */
 
