@@ -11,8 +11,9 @@ const create = async (req, res) => {
         var newUser = { name, email }; //criou um objeto data, com base na desestruturação da requisição do body
 
         var newUser = await conn.getRepository(User).save(newUser);
-
+        
         res.status(201).json({ data: newUser });
+        console.log('Creando usuário')
 
 
     } catch (err) {
@@ -25,6 +26,7 @@ const list = async (req, res) => {
     try {
         const allUsers = await conn.getRepository(User).find();
         res.status(200).json({ data: allUsers });
+        console.log('Listando usuário')
 
     } catch (err) {
         console.log(err);
