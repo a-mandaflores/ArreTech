@@ -1,30 +1,31 @@
 const user = {
-    post:{
+    post: {
         operationId: "createUser",
         description: "Criar usuario",
-        tags: ["Users"],
+        tags: ["User"],
         requestBody: {
             content: {
-                "Application/Json": {                            
-                    schema:{
-                        $ref: "#/components/schemas/User" 
-                    },                        
+                "Application/Json": {
+                    schema: {
+                        $ref: "#/components/schemas/User"
+                    },
                 },
-            }  
+            }
         },
+        responses: { }
     },
-    get:{
+    get: {
         operationId: "userList",
         description: "Listar usuarios",
-        tags: ["Users"],
+        tags: ["User"],
         parameters: [],
         responses: {
-            200: {  
-            description: "Listar todos os usuarios",
+            200: {
+                description: "Ok",
                 content: {
-                    "Application/Json":{
-                        schema:{
-                            $ref: "#/components/schemas/UserList"
+                    "Application/Json": {
+                        schema: {
+                            $ref: "#/components/schemas/User"
                         }
                     }
 
