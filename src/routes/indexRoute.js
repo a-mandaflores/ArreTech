@@ -17,11 +17,11 @@ routes.get('/product', product.listProduct);//Listar produto Ok
 
 routes.get('/store', store.listStore); //Listar lojas Ok
 
-routes.post('/order', order.createOrder); //FINALIZAR COMPRAR Esta criando 1 order e adicionado os itens - OK
+routes.post('/order/:userId', order.createOrder); //FINALIZAR COMPRAR Esta criando 1 order e adicionado os itens - OK
 
-routes.post('/order/item', order.addItem);//Adicionar produtos na lista de pedido de um cliente
+routes.post('/item', order.addItem);//Adicionar produtos na lista de pedido de um cliente
 
-routes.delete('/order/item/:productId', order.removeItem);//Remover produto da lista de pedido de um cliente
+routes.delete('/item/:productId', order.removeItem);//Remover produto da lista de pedido de um cliente
 
 routes.get('/order/user/:userId', user.listOrdersUser); //Listar pedidos de um cliente Ok --> usando Query Builder
 

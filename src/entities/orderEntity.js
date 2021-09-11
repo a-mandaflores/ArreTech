@@ -12,7 +12,13 @@ module.exports = new EntitySchema({
         },
         amount: {
             type: "double"
-        }
+        },
+        status:  {
+            type: "varchar" //status pedido: em analise, realizado, retirado, negado, desistência
+        }/*,
+        date: {
+            type: "date"
+        }*/
     },
     relations: {
         user: {
@@ -26,7 +32,7 @@ module.exports = new EntitySchema({
             target: "OrderItem",
             type: "one-to-many",
             inverseSide: "order", //inverSide especifica um alias que é associado a coluna orderId da tb_order_items
-            cascade: true //cascade deve estar do lado One, para que ao salvar uma nova ordem salve automaticamente os items
+            cascade: true, //cascade deve estar do lado One, para que ao salvar uma nova ordem salve automaticamente os items
             //eager: true   
         }
     }

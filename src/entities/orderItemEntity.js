@@ -24,14 +24,12 @@ module.exports = new EntitySchema({
             target: "Order", // OrderEntity
             type: "many-to-one",
             joinColumn: true,
-            //cascade: true,
-            //eager:true
+            eager: true
         },
         product: {
             target: "Product",
             type: "many-to-one",
             joinColumn: true
-            //cascade: true
         }
     }
 });

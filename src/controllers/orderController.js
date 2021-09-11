@@ -3,19 +3,30 @@ const Order = require('../entities/orderEntity')
 const Product = require('../entities/productEntity')
 
 var items = []
-var count = 0;
 
 const createOrder = async (req, res) => {
 
-    const { user, amount } = req.body
+    const { userId } = req.params;
 
-    var newOrder = { user, amount, items }
+    var user = userId
 
+    var amount = 0
+    
+    for(var i = 0; i < items.length; i++){
+        amount += items[i].totalPrice;
+    }
+    
+    var status = "em analise" //default, após checkout modificara para realizado
+
+    //var dateFormat =  Date.now() //saída desejada date : 'dd/MM/yyyy HH:mm';
+
+    var newOrder = { user, amount, status, items }
+    
     await conn.getRepository(Order).save(newOrder);
 
     //status compra: realizada, retirada, negada, desistiu da compra ()
 
-    res.status(201).json({ data: newOrder });
+    res.status(201).json({ data: newOrder }); 
 
     items.length = 0; //limpa o array de items do pedido
 
@@ -31,6 +42,7 @@ const addItem = async (req, res) => {
 
     if(resultProduct === undefined){
         res.status(400).json({message: 'product not found'})
+
     } else {
         var price = resultProduct.price
 

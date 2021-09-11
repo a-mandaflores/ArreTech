@@ -1,6 +1,7 @@
 const conn = require('../data/databaseIndex');
 const User = require('../entities/userEntity');
 const Order = require('../entities/orderEntity')
+const Item = require('../entities/orderItemEntity')
 
 
 const create = async (req, res) => {
@@ -34,21 +35,34 @@ const list = async (req, res) => {
 
 const listOrdersUser = async (req, res) => {
 
-    const  userId = req.params;
+    const { userId }= req.params;
 
-/* funcionando 
-    const orders = await conn.getRepository(Order)
-        .createQueryBuilder("order")
-        .where("order.user = :userId", {userId: userId})
-        .getMany();
-*/
+    //---- FUNCIONANDO APRESENTA OS DADOS DO USUÁRIO EM CIMA ---------------
     const userOrders = await conn.getRepository(User)
-    .createQueryBuilder('user')
-    .leftJoinAndSelect('user.orders', 'order')
-    .where('user.id = :userId', {userId: userId })
-    .getOne();
+        .createQueryBuilder('user')
+        .leftJoinAndSelect('user.orders', 'order')
+        .where('user.id = :userId', { userId: userId })
+        .getOne();
+    
+    /* Funciona, mas nao é o que eu quero/preciso -- seleciona por id da ordem os itens
+    const orderItems = await conn.getRepository(Order)
+        .createQueryBuilder('order')
+        .leftJoinAndSelect('order.items', 'item')
+        .where('order.id = :orderId', { orderId: 1}) 
+        .getMany();
 
-    res.status(200).json({ data: userOrders })
+    res.status(200).json({ data: orderItems }) */
+
+    const orders = await conn.getRepository(Order)
+    .createQueryBuilder("order")
+    .leftJoinAndSelect("order.items", "item")
+    .where('order.userId = :id', {id: userId})
+    .getMany();
+
+    const userR = conn.getRepository(User);
+    const users = await userR.findOne(userId, { relations: ["orders"] });
+
+    res.status(200).json([users, {orders: orders}])
 }
 
 module.exports = { create, list, listOrdersUser };
