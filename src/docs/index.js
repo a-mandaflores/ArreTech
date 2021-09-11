@@ -3,7 +3,7 @@ const server = require('./servers')
 const components = require('./components')
 const tags = require('./tags')
 
-const user = require('./user')
+const ecommerce = require('./ecommerce')
 
 
 const docs = {
@@ -11,7 +11,7 @@ const docs = {
     ...server,
     ...components,
     ...tags,
-    ...user,
+    ...ecommerce,
     
 
 }

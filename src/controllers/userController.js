@@ -8,13 +8,15 @@ const create = async (req, res) => {
 
     try {
         const { name, email } = req.body;
+        
 
         var newUser = { name, email }; //criou um objeto data, com base na desestruturação da requisição do body
-
+        
         var newUser = await conn.getRepository(User).save(newUser);
         
         res.status(201).json({ data: newUser });
         console.log('Creando usuário')
+        
 
 
     } catch (err) {

@@ -15,8 +15,10 @@ const app = express();
 
 app.use('/docs', swagger.serve, swagger.setup(docs))
 
+app.use(express.json()); //informa para usar requisições e responses em formato Json
+
+
 app.use(routes);
 
-app.use(express.json()); //informa para usar requisições e responses em formato Json
 
 app.listen(PORT, () => console.log(`Servidor em pleno funcionamento na porta ${PORT}`));

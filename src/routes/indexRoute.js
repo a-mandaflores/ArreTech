@@ -7,7 +7,7 @@ const express = require('express');
 
 const routes = express();
 
-routes.use(express.json());
+// routes.use(express.json());
 
 //Rotas do USER
 routes.post('/user', user.create);//Criar cliente Ok
