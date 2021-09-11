@@ -19,11 +19,9 @@ routes.get('/product', product.listProduct);//Listar produto Ok
 routes.get('/store', store.listStore); //Listar lojas Ok
 
 routes.post('/order', order.createOrder); //Esta criando 1 order e adicionado os itens - OK
-
-routes.post('/item', orderItem.addItem);
-
 routes.get('/order/:userId', user.listOrdersUser); //Listar pedidos de um cliente Ok --> usando Query Builder
 
+routes.post('/item', orderItem.addItem);
 routes.delete('/item/:itemId', orderItem.deleteItem);
 /*
 routes.post('/addProduct/:user_id')//Adicionar produtos na lista de pedido de um cliente
