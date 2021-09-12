@@ -8,20 +8,22 @@ width='350px'>
 
 
 ## **Indíce**
-#### - [Sobre](#-API-OMNI-CHANNEL)
-#### - [Tecnologias utilizadas](#-Tecnologias-utilizadas)
-#### - [Instalação e configuração](#-Instalação-e-configuração)
-#### - [Arquitetura](#-Arquitetura)
-#### - [Rotas](#-Rotas)
+> - Sobre
+> - Tecnologias utilizadas
+> - Instalação e configuração
+> - Arquitetura
+> - Rotas
 
 <br>
 <br>
 <br>
 
 
-# **API OMNI CHANNEL** 
+# 🛒 **API OMNI CHANNEL** 
 
-A API omni channel tem como funcionalidade suprir a necessidade de aplicar regras de vendas distintas ou em catálogos de produtos específicos, atendendo os serviços de :
+**Omni channel** é um contexto utilizado para a definição de estratégias do varejo que permeiam diversos canais de interação com clientes, como ações online e offline.
+
+A **API omni channel** tem como funcionalidade suprir a necessidade de aplicar regras de vendas distintas ou em catálogos de produtos específicos, atendendo os serviços de :
 
 - Adicionar um produto na lista da compra da cliente;
 - Remover um produto da lista da compra da cliente; 
@@ -36,7 +38,8 @@ A API omni channel tem como funcionalidade suprir a necessidade de aplicar regra
 <br>
 
 
-# Tecnologias utilizadas 
+
+# 👩‍💻 Tecnologias utilizadas 
 
 | Ferramenta | Descrição |
 | --- | --- |
@@ -52,7 +55,7 @@ A API omni channel tem como funcionalidade suprir a necessidade de aplicar regra
  `Insomnia / Postman` | Interface gráfica para realizar os testes|
 <br>
 
-# Instalação e configuração
+# 🛠 Instalação e configuração
 ## Pré-requisitos:
 
 É necessário instalar [MySql](https://dev.mysql.com/downloads/installer/) versão 8.0, [NodeJS](https://nodejs.org/pt-br/download/) versão14.17.6 e [Git](http://git-scm.com/downloads) versão 2.33.0 para a instalação do projeto. <br>
@@ -82,14 +85,12 @@ $ yarn start
 
 <br>
 
-# Arquitetura
+# 📂 Arquitetura
 
-A estrutura foi organizada em camadas para ter a devida separação por tarefas e facilitar a compreensão  das lógicas, e regras de negócios exigidas.
+A estrutura foi organizada em camadas para ter a devida separação por tarefas e facilitar a compreensão  das lógicas, e regras de negócios exigidas.<br>
 Apesar de aumentar a configuração inicial, essa arquitetura irá garantir facilidade de manutenção do código, escalabilidade, entre outras vantagens a médio e longo prazo.
 
 <br>
-
-
 
 ```
 📁 ArreTech
@@ -135,7 +136,7 @@ Apesar de aumentar a configuração inicial, essa arquitetura irá garantir faci
 
 <br>
 
-# Rotas
+# 🚧 Rotas
 
 Rota para criar clientes : 
 ```js
@@ -197,7 +198,9 @@ Rota para finalizar compra :
 ```JS
 POST http://localhost:9090/item//checkout/:user_id
 ```
- verificar se são 12 ou 13 rotas**
+
+<br>
+<br>
 
  ### criado por 💜 ArreTech
 
