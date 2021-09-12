@@ -17,5 +17,13 @@ module.exports = new EntitySchema({
             type: "varchar",
             length: 30
         }
+    },
+    relations: {
+        orders: {
+            target: "Order", // OrderEntity
+            type: "one-to-many",
+            inverseSide: "user" //*muito importante! traz consistencia na relação (é um alias q referencia a userId em order)
+            //eager: true
+        }
     }
 });

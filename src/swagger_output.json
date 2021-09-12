@@ -1,0 +1,376 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "ArreTech: API ECommerce ",
+    "description": "Api Ecommerce para o projeto final da aceleração <b> Luiza Code. </b>"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "User",
+      "description": "Endpoints"
+    },
+    {
+      "name": "Product",
+      "description": "Endpoints"
+    },
+    {
+      "name": "Store",
+      "description": "Endpoints"
+    },
+    {
+      "name": "Item",
+      "description": "Endpoints"
+    },
+    {
+      "name": "Order",
+      "description": "Endpoints"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    },
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://petstore.swagger.io/oauth/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "read_pets": "read your pets",
+        "write_pets": "modify pets in your account"
+      }
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint - cadastrar um novo usuário.",
+        "parameters": [
+          {
+            "name": "newUser",
+            "in": "body",
+            "description": "Informações do usuário.",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/AddUser"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuário cadastrado com sucesso"
+          },
+          "500": {
+            "description": "Erro de servidor"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint - ____FUNC____ todos os usuários.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/product": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Endpoint - listar todos os produtos do OmniChannel.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lista de produtos"
+          },
+          "500": {
+            "description": "Erro de servidor"
+          }
+        }
+      }
+    },
+    "/store": {
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "description": "Endpoint - listar todas lojas físicas do OmniChannel.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lista de lojas"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/order/{userId}": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Endpoint - Novo pedido",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/order/user/{userId}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/item": {
+      "post": {
+        "tags": [
+          "Item"
+        ],
+        "description": "Endpoint - Adicionar item a lista de pedido.",
+        "parameters": [
+          {
+            "name": "newItem",
+            "in": "body",
+            "description": "Informações do item.",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/AddItem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Itens adicionados à lista"
+          },
+          "404": {
+            "description": "Produto não localizado"
+          }
+        }
+      }
+    },
+    "/item/{productId}": {
+      "delete": {
+        "tags": [
+          "Item"
+        ],
+        "description": "Endpoint - Remover item da lista de pedido.",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item removido da lista de pedido."
+          },
+          "400": {
+            "description": "Nenhum item na lista de pedido."
+          },
+          "404": {
+            "description": "Produto não localizado na lista de pedido"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Nome do usuário"
+        },
+        "email": {
+          "type": "string",
+          "example": "Email do usuário"
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "TV"
+        },
+        "description": {
+          "type": "string",
+          "example": "TV Samsung"
+        },
+        "producer": {
+          "type": "string",
+          "example": "Samsung"
+        },
+        "price": {
+          "type": "number",
+          "example": 12.5
+        }
+      }
+    },
+    "AddUser": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Nome novo usuário"
+        },
+        "email": {
+          "type": "string",
+          "example": "usuario@email.com"
+        }
+      },
+      "required": [
+        "name",
+        "email"
+      ]
+    },
+    "Store": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "Magazine Luiza - Santo Amaro, Loja 1"
+        },
+        "city": {
+          "type": "string",
+          "example": "São Paulo"
+        },
+        "state": {
+          "type": "string",
+          "example": "SP"
+        },
+        "manager": {
+          "type": "string",
+          "example": "Gerente"
+        }
+      }
+    },
+    "Item": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "type": "number",
+          "example": 1
+        },
+        "quantity": {
+          "type": "number",
+          "example": 2
+        },
+        "price": {
+          "type": "number",
+          "example": 12.5
+        },
+        "totalPrice": {
+          "type": "number",
+          "example": 25
+        }
+      }
+    },
+    "AddItem": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "type": "number",
+          "example": 1
+        },
+        "quantity": {
+          "type": "number",
+          "example": 2
+        }
+      }
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "user": {
+          "type": "number",
+          "example": 1
+        },
+        "amount": {
+          "type": "number",
+          "example": 25
+        },
+        "status": {
+          "type": "string",
+          "example": "em análise"
+        }
+      }
+    }
+  }
+}

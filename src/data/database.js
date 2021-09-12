@@ -1,5 +1,5 @@
-const createConnection = require('typeorm');
 
+const createConnection = require('typeorm');
 try{
     createConnection.createConnection();
     //return conn;

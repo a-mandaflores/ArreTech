@@ -28,5 +28,14 @@ module.exports = new EntitySchema({
             nullable: false,
             require: true
         }
+    },
+    relations: {
+        orderItem: {
+            target: "OrderItem", // OrderEntity
+            type: "one-to-many",
+            inverseSide: "product"
+            //cascade: true,
+            //eager:true
+        }
     }
 });
