@@ -2,10 +2,10 @@ const express = require('express');
 
 const routes = require('./src/routes/indexRoute');
 
-const swagger = require('swagger-ui-express')
-const docs = require('./src/docs')
+const swaggerUI = require('swagger-ui-express')
+const swagger = require('./swagger')
 
-const PORT = 9090;
+const PORT = 3000;
 
 //const db = require("./src/data"); //outra forma de escrever a linha 11
 
@@ -13,7 +13,9 @@ require('./src/data/databaseIndex');
 
 const app = express();
 
-app.use('/docs', swagger.serve, swagger.setup(docs))
+app.use('/doc', swaggerUI.serve, swaggerUI.setup(swagger))
+
+require('./endpoints')(app)
 
 app.use(express.json()); //informa para usar requisições e responses em formato Json
 
