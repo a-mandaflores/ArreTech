@@ -1,17 +1,91 @@
 const conn = require('../data/databaseIndex')
+const Order = require('../entities/orderEntity')
+const Product = require('../entities/productEntity')
 
-//const Order = require('../entities/orderEntity')
-//const Order = require('../entities/orderItemEntity')
+var items = []
 
+const createOrder = async (req, res) => {
 
-const createProduct = async (req, res) => {
+    const { userId } = req.params;
 
-    const { name, description } = req.body;
+    var user = userId
 
-    var newProduct = await conn.getRepository(Product).save(req.body);
+    var amount = 0
+    
+    for(var i = 0; i < items.length; i++){
+        amount += items[i].totalPrice;
+    }
+    
+    var status = "em analise" //default, após checkout modificara para realizado
 
-    return res.status(201).json({data: newProduct});
+    //var dateFormat =  Date.now() //saída desejada date : 'dd/MM/yyyy HH:mm';
+
+    var newOrder = { user, amount, status, items }
+    
+    await conn.getRepository(Order).save(newOrder);
+
+    //status compra: realizada, retirada, negada, desistiu da compra ()
+
+    res.status(201).json({ data: newOrder }); 
+
+    items.length = 0; //limpa o array de items do pedido
+
 }
 
-module.exports = createProduct;
+const addItem = async (req, res) => {
+
+    var product = req.body.product
+
+    var quantity = req.body.quantity
+
+    var resultProduct = await conn.getRepository(Product).findOne(product);
+
+    if(resultProduct === undefined){
+        res.status(400).json({message: 'product not found'})
+
+    } else {
+        var price = resultProduct.price
+
+        var totalPrice = quantity*resultProduct.price
+    
+        items.push({product, quantity, price, totalPrice})
+    
+        res.status(200).json({ items })
+    }
+}
+
+const removeItem = async (req, res) => {
+
+    if (items.length === 0) {
+        await res.status(400).json({ message: "items array is empty" });
+
+    } else {
+        const { productId } = req.params; //tem q colocar entre parenteses para receber o dado
+
+        var e = -1;
+        var item;
+
+        for (i = 0; i < items.length; i++) {
+            if (items[i].product == productId) {
+                e = 0
+                item = items.indexOf(items[i]);
+                break;
+
+            }
+        }
+
+        if (e == 0) {
+            try {
+                items.splice(item, 1);
+                await res.status(200).json({ data: items });
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            await res.status(400).json({ message: "product not found in items array" });
+        }
+    }
+}
+
+module.exports = { createOrder, addItem, removeItem };
 

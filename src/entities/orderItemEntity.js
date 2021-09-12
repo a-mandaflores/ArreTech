@@ -10,22 +10,26 @@ module.exports = new EntitySchema({
             generated: true
         },
         price: {
-        type: "double"
+            type: "double"
+        },
+        quantity: {
+            type: "int"
+        },
+        totalPrice: {
+            type: "double"
         }
     },
     relations: {
         order: {
             target: "Order", // OrderEntity
             type: "many-to-one",
-            joinTable: true,
-            cascade: true
+            joinColumn: true,
+            eager: true
         },
-        product :{
+        product: {
             target: "Product",
             type: "many-to-one",
-            joinTable: true,
-            cascade: true
+            joinColumn: true
         }
-
     }
 });
