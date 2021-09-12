@@ -1,38 +1,51 @@
-const conn = require('../data/databaseIndex')
+const conn = require('../data/database')
 const Order = require('../entities/orderEntity')
 const Product = require('../entities/productEntity')
 
 var items = []
 
 const createOrder = async (req, res) => {
+    // #swagger.tags = ['Order']
+    // #swagger.description = 'Endpoint - Novo pedido'
 
     const { userId } = req.params;
 
     var user = userId
 
     var amount = 0
-    
-    for(var i = 0; i < items.length; i++){
+
+    for (var i = 0; i < items.length; i++) {
         amount += items[i].totalPrice;
     }
-    
-    var status = "em analise" //default, após checkout modificara para realizado
+
+    var status = "em analise" //default, após checkout modificar para realizado
 
     //var dateFormat =  Date.now() //saída desejada date : 'dd/MM/yyyy HH:mm';
 
     var newOrder = { user, amount, status, items }
-    
+
     await conn.getRepository(Order).save(newOrder);
 
     //status compra: realizada, retirada, negada, desistiu da compra ()
 
-    res.status(201).json({ data: newOrder }); 
-
+    res.status(201).json({ order: newOrder });
+    
     items.length = 0; //limpa o array de items do pedido
 
 }
 
 const addItem = async (req, res) => {
+    // #swagger.tags = ['Item']
+    // #swagger.description = 'Endpoint - Adicionar item a lista de pedido.'
+
+    /* #swagger.parameters['newItem'] = {
+    in: 'body',
+    description: 'Informações do item.',
+    required: true,
+    type: 'object',
+    schema: { $ref: "#/definitions/AddItem" }
+ } */
+
 
     var product = req.body.product
 
@@ -40,23 +53,28 @@ const addItem = async (req, res) => {
 
     var resultProduct = await conn.getRepository(Product).findOne(product);
 
-    if(resultProduct === undefined){
-        res.status(400).json({message: 'product not found'})
+    if (resultProduct === undefined) {
+        // #swagger.responses[404] = { description: 'Produto não localizado' }
+        res.status(404).json({ message: 'product not found' })
 
     } else {
         var price = resultProduct.price
 
-        var totalPrice = quantity*resultProduct.price
-    
-        items.push({product, quantity, price, totalPrice})
-    
+        var totalPrice = quantity * resultProduct.price
+
+        items.push({ product, quantity, price, totalPrice })
+
+        // #swagger.responses[200] = { description: 'Itens adicionados à lista' }
         res.status(200).json({ items })
     }
 }
 
 const removeItem = async (req, res) => {
+    // #swagger.tags = ['Item']
+    // #swagger.description = 'Endpoint - Remover item da lista de pedido.'
 
     if (items.length === 0) {
+        // #swagger.responses[400] = { description: 'Nenhum item na lista de pedido.' }
         await res.status(400).json({ message: "items array is empty" });
 
     } else {
@@ -77,12 +95,14 @@ const removeItem = async (req, res) => {
         if (e == 0) {
             try {
                 items.splice(item, 1);
-                await res.status(200).json({ data: items });
+                // #swagger.responses[200] = { description: 'Item removido da lista de pedido.' }
+                await res.status(200).json({ message: 'item successfully removed' });
             } catch (err) {
                 console.log(err);
             }
         } else {
-            await res.status(400).json({ message: "product not found in items array" });
+            // #swagger.responses[404] = { description: 'Produto não localizado na lista de pedido' }
+            await res.status(404).json({ message: "product not found in items array" });
         }
     }
 }
