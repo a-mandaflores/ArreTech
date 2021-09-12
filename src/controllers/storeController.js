@@ -1,15 +1,19 @@
-const conn = require('../data/databaseIndex');
+const conn = require('../data/database');
 const tbStore = require('../entities/storeEntity');
 
 //listar lojas
 const listStore = async (req, res) => {
+    // #swagger.tags = ['Store']
+    // #swagger.description = 'Endpoint - listar todas lojas físicas do OmniChannel.'
     try {
         
         const allStore = await conn.getRepository(tbStore).find();
-        return res.status(200).json({ data: allStore });   
+        // #swagger.responses[200] = { description: 'Lista de lojas' }
+        return res.status(200).json({ store: allStore });   
         
     } catch (error) {
-        return res.status(400).send(error);        
+        // #swagger.response[500] = { description: 'Erro de servidor' }
+        return res.status(500).send(error);        
     } 
 }
 

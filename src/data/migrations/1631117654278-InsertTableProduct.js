@@ -1,6 +1,6 @@
 //const { MigrationInterface, QueryRunner } = require("typeorm");
 
-const conn = require('../../data/databaseIndex')
+const conn = require('../../data/database')
 
 
 module.exports = class InsertTableProduct16311176542782 {

@@ -1,4 +1,4 @@
-const conn = require('../data/databaseIndex');
+const conn = require('../data/database');
 const User = require('../entities/userEntity');
 const Order = require('../entities/orderEntity')
 const Item = require('../entities/orderItemEntity')
@@ -6,29 +6,45 @@ const Item = require('../entities/orderItemEntity')
 
 const create = async (req, res) => {
 
+    // #swagger.tags = ['User']
+    // #swagger.description = 'Endpoint - cadastrar um novo usuário.'
+
+    /* #swagger.parameters['newUser'] = {
+       in: 'body',
+       description: 'Informações do usuário.',
+       required: true,
+       type: 'object',
+       schema: { $ref: "#/definitions/AddUser" }
+    } */
+
     try {
         const { name, email } = req.body;
-        
+
 
         var newUser = { name, email }; //criou um objeto data, com base na desestruturação da requisição do body
-        
+
         var newUser = await conn.getRepository(User).save(newUser);
-        
-        res.status(201).json({ data: newUser });
-        //console.log('Creando usuário')
+// #swagger.responses[201] = { description: 'Usuário cadastrado com sucesso' }
+        // #swagger.responses[201] = { description: 'Usuário cadastrado com sucesso' }
+        res.status(201).json(newUser);
 
 
     } catch (err) {
-
-        console.log(err);
+        // #swagger.responses[500] = { description: 'Erro de servidor' }
+        res.status(500).json(err);
     }
 };
-//rota de teste, será apagada
+
+
 const list = async (req, res) => {
+    // #swagger.tags = ['User']
+    // #swagger.description = 'Endpoint - listar todos os usuários.'
+
     try {
         const allUsers = await conn.getRepository(User).find();
+
+
         res.status(200).json({ data: allUsers });
-        console.log('Listando usuário')
 
     } catch (err) {
         console.log(err);
@@ -38,7 +54,7 @@ const list = async (req, res) => {
 
 const listOrdersUser = async (req, res) => {
 
-    const { userId }= req.params;
+    const { userId } = req.params;
 
     //---- FUNCIONANDO APRESENTA OS DADOS DO USUÁRIO EM CIMA ---------------
     const userOrders = await conn.getRepository(User)
@@ -46,26 +62,17 @@ const listOrdersUser = async (req, res) => {
         .leftJoinAndSelect('user.orders', 'order')
         .where('user.id = :userId', { userId: userId })
         .getOne();
-    
-    /* Funciona, mas nao é o que eu quero/preciso -- seleciona por id da ordem os itens
-    const orderItems = await conn.getRepository(Order)
-        .createQueryBuilder('order')
-        .leftJoinAndSelect('order.items', 'item')
-        .where('order.id = :orderId', { orderId: 1}) 
-        .getMany();
-
-    res.status(200).json({ data: orderItems }) */
 
     const orders = await conn.getRepository(Order)
-    .createQueryBuilder("order")
-    .leftJoinAndSelect("order.items", "item")
-    .where('order.userId = :id', {id: userId})
-    .getMany();
+        .createQueryBuilder("order")
+        .leftJoinAndSelect("order.items", "item")
+        .where('order.userId = :id', { id: userId })
+        .getMany();
 
     const userR = conn.getRepository(User);
-    const users = await userR.findOne(userId, { relations: ["orders"] });
+    const user = await userR.findOne(userId, { relations: ["orders"] });
 
-    res.status(200).json([users, {orders: orders}])
+    res.status(200).json([user, { orders: orders }])
 }
 
 module.exports = { create, list, listOrdersUser };
