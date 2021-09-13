@@ -106,8 +106,12 @@ Apesar de aumentar a configuração inicial, essa arquitetura irá garantir faci
    |    
    |    |- 📁 data
    |         |- 📁 migrations
-   |              |- 📄 1631117654278-InsertTableProduct.js
-   |         |- 📄 databaseIndex.js
+   |              |- 📄 1631534253127-tableProduct.js
+                  |- 📄 1631536530354-tableUser.js
+                  |- 📄 1631536822918-tableStore.js
+                  |- 📄 1631538116639-tableOrder.js
+                  |- 📄 1631538823893-tableOrderItem.js
+   |         |- 📄 database.js
    |
    |    |- 📁 entities
    |         |- 📄 orderEntity.js
@@ -122,14 +126,18 @@ Apesar de aumentar a configuração inicial, essa arquitetura irá garantir faci
    |         |- 📄 productRoute.js
    |         |- 📄 storeRoute.js
    |         |- 📄 userRoute.js
-   |
+   | 
+        |- 📄 app.js
+        |- 📄 jwtauth.js
+        |- 📄 swagger_output.json
+        |- 📄 swagger.js
+   |     
    |- 📄 .env
    |- 📄 .env.example
    |- 📄 .gitignore
    |- 📄 ormconfig.json
    |- 📄 package.json
    |- 📄 README.md
-   |- 📄 server.js
    |- 📄 yarn-error.log
    |- 📄 yarn.lock
 ```
@@ -138,65 +146,49 @@ Apesar de aumentar a configuração inicial, essa arquitetura irá garantir faci
 
 # 🚧 Rotas
 
-Rota para criar clientes : 
-```js
- POST  http://localhost:9090/user
+Rota para cadastrar novo cliente : 
+```JS
+ POST  http://localhost:3000/user
 ```
 
-Rota para listar clientes :
+Rota para logar cliente :
 ```JS
-GET  http://localhost:9090/user
+GET  http://localhost:3000/user/login
 ```
 
-Rota para criar produtos :
+Rota para cliente visualizar seu histórico de pedidos :
 ```JS
-POST  http://localhost:9090/product
+GET  http://localhost:3000/user/orders/:userId
 ```
 
 Rota para listar produtos :
 ```JS
-GET  http://localhost:9090/product
+GET  http://localhost:3000/product
 ```
 
 Rota para listar lojas :
 ```JS
-GET  http://localhost:9090/store
+GET  http://localhost:3000/store
 ```
 
-Rota para criar pedido e adicionar itens :
+Rota para adicionar item a lista de pedido:
 ```JS
-POST  http://localhost:9090/order
+POST http://localhost:3000/item
 ```
 
-Rota para listar histórico do cliente :
+Rota para remover item da lista de pedido:
 ```JS
-GET  http://localhost:9090/order/:userId
+DELETE http://localhost:3000/item/:itemId
 ```
 
-Rota para adicionar item :
+Rota para criar pedido e adicionar os itens :
 ```JS
-POST http://localhost:9090/item
-```
-
-Rota para excluir item :
-```JS
-DELETE http://localhost:9090/item/:itemId
-```
-
-
-Rota para adicionar produtos na lista de pedido de um cliente :
-```JS
-POST  http://localhost:9090/item//addProduct/:user_id
-```
-
-Rota para remover produto da lista de pedido de um cliente :
-```JS
-DELETE http://localhost:9090/item//removeProduct/:user_id
+POST  http://localhost:3000/order
 ```
 
 Rota para finalizar compra :
 ```JS
-POST http://localhost:9090/item//checkout/:user_id
+POST http://localhost:3000/order/checkout
 ```
 
 <br>
