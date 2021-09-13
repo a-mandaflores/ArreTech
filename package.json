@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "typeorm": "node node_modules/typeorm/cli.js",
-    "swagger-autogen": "node src/swagger.js"
+    "start": "node src/swagger.js"
   },
   "dependencies": {
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.0",
     "swagger-autogen": "^2.11.2",
     "swagger-ui-express": "^4.1.6",

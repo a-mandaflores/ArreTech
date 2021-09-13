@@ -2,7 +2,7 @@ var EntitySchema = require("typeorm").EntitySchema;
 
 module.exports = new EntitySchema({
     name: "User", //nome da entidade, e por default nome da tabela no bd
-    tableName: "tb_users", //redefinindo o nome da tabela no bd
+    tableName: "tb_user", //redefinindo o nome da tabela no bd
     columns: {
         id: {
             primary: true,
@@ -11,11 +11,18 @@ module.exports = new EntitySchema({
         },
         name: {
             type: "varchar",
-            length: 30
+            length: 30,
+            nullable: false
         },
         email: {
             type: "varchar",
-            length: 30
+            length: 30,
+            nullable: false
+        },
+        password: {
+            type: "varchar",
+            length: 15,
+            nullable: false
         }
     },
     relations: {

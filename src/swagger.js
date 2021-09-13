@@ -36,42 +36,31 @@ const doc = {
             "description": "Endpoints"
         }
     ],
-    securityDefinitions: {
-        api_key: {
-            type: "apiKey",
-            name: "api_key",
-            in: "header"
-        },
-        petstore_auth: {
-            type: "oauth2",
-            authorizationUrl: "https://petstore.swagger.io/oauth/authorize",
-            flow: "implicit",
-            scopes: {
-                read_pets: "read your pets",
-                write_pets: "modify pets in your account"
-            }
-        }
-    },
     definitions: {
         User: {
             name: "Nome do usuário",
             email: "Email do usuário",
+            password: "Senha do usuário"
 
         },
         Product: {
             id: 1,
-            name: "TV",
             description: "TV Samsung",
             producer: "Samsung",
-            price: 12.5
+            price: 2219.00
         },
         AddUser: {
             $name: "Nome novo usuário",
-            $email: "usuario@email.com"
+            $email: "usuario@email.com",
+            $password: "Senha do usuário"
+        },
+        UserLogin: {
+            $email: "usuario@email.com",
+            $password: "Senha do usuário"
         },
         Store: {
             id: 1,
-            name: "Magazine Luiza - Santo Amaro, Loja 1",
+            name: "Santo Amaro, Loja 1",
             city: "São Paulo",
             state: "SP",
             manager: "Gerente"
@@ -93,7 +82,29 @@ const doc = {
             status: 'em análise'
 
         }
-    }
+    },
+    securityDefinitions: {
+        api_key: {
+            type: "apiKey",
+            name: "api_key",
+            in: "header"
+        },
+        petstore_auth: {
+            type: "oauth2",
+            authorizationUrl: "https://petstore.swagger.io/oauth/authorize",
+            flow: "implicit",
+            scopes: {
+                read_pets: "read your pets",
+                write_pets: "modify pets in your account"
+            }
+        },
+        apiKeyAuth: {
+            type: "apiKey",
+            in: "header",
+            name: "authorization",
+            description: 'Insira seu token para garantir acesso aos endpoints'
+        }
+    },
 }
 
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {

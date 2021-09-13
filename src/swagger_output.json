@@ -47,6 +47,12 @@
         "read_pets": "read your pets",
         "write_pets": "modify pets in your account"
       }
+    },
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization",
+      "description": "Insira seu token para garantir acesso aos endpoints"
     }
   },
   "consumes": [
@@ -61,7 +67,7 @@
         "tags": [
           "User"
         ],
-        "description": "Endpoint - cadastrar um novo usuário.",
+        "description": "Endpoint - cadastrar um novo usuário",
         "parameters": [
           {
             "name": "newUser",
@@ -82,31 +88,63 @@
             "description": "Erro de servidor"
           }
         }
-      },
-      "get": {
+      }
+    },
+    "/user/login": {
+      "post": {
         "tags": [
           "User"
         ],
-        "description": "Endpoint - ____FUNC____ todos os usuários.",
-        "parameters": [],
+        "description": "Endpoint - logar usuário",
+        "parameters": [
+          {
+            "name": "userLogin",
+            "in": "body",
+            "description": "Dados de login de um usuário.",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
-    "/product": {
-      "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created"
+    "/user/orders/{userId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint - listar todos os pedidos do usuário",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
-        }
-      },
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/product": {
       "get": {
         "tags": [
           "Product"
@@ -157,27 +195,35 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
-    "/order/user/{userId}": {
-      "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+    "/order/checkout": {
+      "put": {
+        "tags": [
+          "Order"
         ],
+        "description": "Endpoint - Novo pedido",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/item": {
@@ -247,6 +293,10 @@
         "email": {
           "type": "string",
           "example": "Email do usuário"
+        },
+        "password": {
+          "type": "string",
+          "example": "Senha do usuário"
         }
       }
     },
@@ -256,10 +306,6 @@
         "id": {
           "type": "number",
           "example": 1
-        },
-        "name": {
-          "type": "string",
-          "example": "TV"
         },
         "description": {
           "type": "string",
@@ -271,7 +317,7 @@
         },
         "price": {
           "type": "number",
-          "example": 12.5
+          "example": 2219
         }
       }
     },
@@ -285,11 +331,33 @@
         "email": {
           "type": "string",
           "example": "usuario@email.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "Senha do usuário"
         }
       },
       "required": [
         "name",
-        "email"
+        "email",
+        "password"
+      ]
+    },
+    "UserLogin": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "usuario@email.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "Senha do usuário"
+        }
+      },
+      "required": [
+        "email",
+        "password"
       ]
     },
     "Store": {
@@ -301,7 +369,7 @@
         },
         "name": {
           "type": "string",
-          "example": "Magazine Luiza - Santo Amaro, Loja 1"
+          "example": "Santo Amaro, Loja 1"
         },
         "city": {
           "type": "string",

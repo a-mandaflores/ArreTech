@@ -1,16 +1,22 @@
+
 const conn = require('../data/database')
 const Order = require('../entities/orderEntity')
 const Product = require('../entities/productEntity')
 
 var items = []
+var orderId = 0
 
 const createOrder = async (req, res) => {
     // #swagger.tags = ['Order']
     // #swagger.description = 'Endpoint - Novo pedido'
 
-    const { userId } = req.params;
+    /* #swagger.security = [{
+       "apiKeyAuth": []
+    }] */
 
-    var user = userId
+    const { userId } = req.params
+
+    //  var user = userId
 
     var amount = 0
 
@@ -18,20 +24,39 @@ const createOrder = async (req, res) => {
         amount += items[i].totalPrice;
     }
 
-    var status = "em analise" //default, após checkout modificar para realizado
+    var status = "aberto" //default, após checkout modificar para realizado
+
+    //status pedido: realizado, retirado, negado, desistiu da compra
 
     //var dateFormat =  Date.now() //saída desejada date : 'dd/MM/yyyy HH:mm';
 
-    var newOrder = { user, amount, status, items }
+    var newOrder = { userId, amount, status, items }
 
-    await conn.getRepository(Order).save(newOrder);
+    const order = await conn.getRepository(Order).save(newOrder);
 
-    //status compra: realizada, retirada, negada, desistiu da compra ()
+    orderId = order.id
 
-    res.status(201).json({ order: newOrder });
-    
+    res.status(201).json({ order: order });
+
     items.length = 0; //limpa o array de items do pedido
 
+}
+const checkout = async (req, res) => {
+
+    // #swagger.tags = ['Order']
+    // #swagger.description = 'Endpoint - Novo pedido'
+
+    /* #swagger.security = [{
+       "apiKeyAuth": []
+    }] */
+
+    const order = await conn.getRepository(Order).findOne(orderId)
+
+    order.status = 'finalizado'
+
+    await conn.getRepository(Order).save(order);
+
+    res.status(200).json(order)
 }
 
 const addItem = async (req, res) => {
@@ -44,9 +69,8 @@ const addItem = async (req, res) => {
     required: true,
     type: 'object',
     schema: { $ref: "#/definitions/AddItem" }
+
  } */
-
-
     var product = req.body.product
 
     var quantity = req.body.quantity
@@ -107,5 +131,5 @@ const removeItem = async (req, res) => {
     }
 }
 
-module.exports = { createOrder, addItem, removeItem };
+module.exports = { createOrder, checkout, addItem, removeItem };
 
