@@ -2,6 +2,7 @@
 const conn = require('../data/database')
 const Order = require('../entities/orderEntity')
 const Product = require('../entities/productEntity')
+const User = require('../entities/userEntity')
 
 var items = []
 var orderId = 0
@@ -16,29 +17,44 @@ const createOrder = async (req, res) => {
 
     const { userId } = req.params
 
-    //  var user = userId
+    const user = await conn.getRepository(User).findOne(userId)
 
-    var amount = 0
+    if (user != null && user != undefined) {
+        var amount = 0
 
-    for (var i = 0; i < items.length; i++) {
-        amount += items[i].totalPrice;
+        if (items.length != 0) {
+            for (var i = 0; i < items.length; i++) {
+                amount += items[i].totalPrice;
+            }
+
+            var status = "aberto" //default, após checkout modificar para realizado
+
+            //status pedido: realizado, retirado, negado, desistiu da compra
+
+            //var dateFormat =  Date.now() //saída desejada date : 'dd/MM/yyyy HH:mm';
+
+            var newOrder = { userId, amount, status, items }
+
+            const order = await conn.getRepository(Order).save(newOrder);
+
+            orderId = order.id
+
+            res.status(201).json({ order: order });
+
+            items.length = 0; //limpa o array de items do pedido
+
+
+        } else {
+
+            res.status(404).send('items array is empty')
+        }
+
+    } else {
+        res.status(400).send('unregistered user')
     }
 
-    var status = "aberto" //default, após checkout modificar para realizado
 
-    //status pedido: realizado, retirado, negado, desistiu da compra
 
-    //var dateFormat =  Date.now() //saída desejada date : 'dd/MM/yyyy HH:mm';
-
-    var newOrder = { userId, amount, status, items }
-
-    const order = await conn.getRepository(Order).save(newOrder);
-
-    orderId = order.id
-
-    res.status(201).json({ order: order });
-
-    items.length = 0; //limpa o array de items do pedido
 
 }
 const checkout = async (req, res) => {

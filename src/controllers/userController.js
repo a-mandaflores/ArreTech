@@ -2,9 +2,6 @@ require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const conn = require('../data/database');
 const User = require('../entities/userEntity');
-const Order = require('../entities/orderEntity')
-
-
 
 const create = async (req, res) => {
 

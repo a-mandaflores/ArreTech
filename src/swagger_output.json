@@ -178,54 +178,6 @@
         }
       }
     },
-    "/order/{userId}": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "description": "Endpoint - Novo pedido",
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/order/checkout": {
-      "put": {
-        "tags": [
-          "Order"
-        ],
-        "description": "Endpoint - Novo pedido",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
     "/item": {
       "post": {
         "tags": [
@@ -279,6 +231,60 @@
             "description": "Produto não localizado na lista de pedido"
           }
         }
+      }
+    },
+    "/order/{userId}": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Endpoint - Novo pedido",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/order/checkout": {
+      "put": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Endpoint - Novo pedido",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     }
   },

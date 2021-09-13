@@ -77,13 +77,21 @@ Instalar as dependências:
 ```bash
 $ yarn install
 ```
-Iniciar projeto:
+Criar, através de seu gerenciador do mysql, o seguinte banco de dados:
+
+```bash
+db_arretech
+```
+
+Iniciar projeto, atualizar o swagger e subir as migrations:
 
 ```bash
 $ yarn start
 ```
-
 <br>
+
+## Acesso ao swagger:
+
 
 # 📂 Arquitetura
 
@@ -121,11 +129,11 @@ Apesar de aumentar a configuração inicial, essa arquitetura irá garantir faci
    |         |- 📄 userEntity.js
    |
    |    |- 📁 routes
-   |         |- 📄 indexRoute.js
-   |         |- 📄 orderRoute.js
-   |         |- 📄 productRoute.js
-   |         |- 📄 storeRoute.js
-   |         |- 📄 userRoute.js
+   |         |- 📄 itemRouter.js
+   |         |- 📄 orderRouter.js
+   |         |- 📄 productRouter.js
+   |         |- 📄 storeRouter.js
+   |         |- 📄 userRouter.js
    | 
         |- 📄 app.js
         |- 📄 jwtauth.js
