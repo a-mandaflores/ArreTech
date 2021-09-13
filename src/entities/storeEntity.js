@@ -2,7 +2,7 @@ var EntitySchema = require("typeorm").EntitySchema;
 
 module.exports = new EntitySchema({
     name: "Store", //nome da entidade, e por default nome da tabela no bd
-    tableName: "tb_stores", //redefinindo o nome da tabela no bd
+    tableName: "tb_store", //redefinindo o nome da tabela no bd
     columns: {
         id: {
             primary: true,
@@ -11,7 +11,8 @@ module.exports = new EntitySchema({
         },
         name: {
             type: "varchar",
-            length: 30
+            length: 30,
+            nullable: false
         },
         city: {
             type: "varchar",
@@ -19,7 +20,7 @@ module.exports = new EntitySchema({
         },
         state: {
             type: "varchar",
-            length: 30
+            length: 2
         },
         manager: {
             type: "varchar",

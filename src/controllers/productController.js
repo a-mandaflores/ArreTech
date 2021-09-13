@@ -1,13 +1,13 @@
 const conn = require('../data/database');
 const Product = require('../entities/productEntity');
 
-
+/*
 const createProduct = async (req, res) => {
 
     const newProduct = await conn.getRepository(Product).save(req.body);
     return res.status(201).json({ data: newProduct });
 
-}
+}*/
 
 const listProduct = async (req, res) => {
     // #swagger.tags = ['Product']
@@ -25,4 +25,4 @@ const listProduct = async (req, res) => {
 }
 
 
-module.exports = { createProduct, listProduct };
+module.exports = { listProduct };

@@ -3,7 +3,7 @@ var EntitySchema = require("typeorm").EntitySchema;
 
 module.exports = new EntitySchema({
     name: "Order", //nome da entidade, e por default nome da tabela no bd
-    tableName: "tb_orders", //redefinindo o nome da tabela no bd
+    tableName: "tb_order", //redefinindo o nome da tabela no bd
     columns: {
         id: {
             primary: true,
@@ -11,10 +11,12 @@ module.exports = new EntitySchema({
             generated: true
         },
         amount: {
-            type: "double"
+            type: "double",
+            nullable: true
         },
         status:  {
-            type: "varchar" //status pedido: em analise, realizado, retirado, negado, desistência
+            type: "varchar", //status pedido: em analise, realizado, retirado, negado, desistência
+            length: 15
         }/*,
         date: {
             type: "date"

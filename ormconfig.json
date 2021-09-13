@@ -5,12 +5,13 @@
     "username": "root",
     "password": "root",
     "database": "db_arretech",
-    "synchronize": true,
+    "synchronize": false,
     "entities": ["./src/entities/**.js"],
     "repositories": ["./src/repositories/**.js"],
     "migrations": ["./src/data/migrations/**.js"],
     "cli":{
-        "entities": "./src/entities",
+        "entitiesDir": "./src/entities",
         "migrationsDir":"./src/data/migrations"
-    }
+    },
+    "migrationsRun": true
 }

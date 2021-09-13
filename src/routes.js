@@ -1,4 +1,6 @@
 
+const auth = require('./jwtauth')
+
 module.exports = function (router) {
 
     const user = require('./controllers/userController');
@@ -14,18 +16,21 @@ module.exports = function (router) {
 
     //Rotas do USER
     router.post('/user', user.create);//Criar cliente Ok
-    router.get('/user', user.list); //rota de teste -> vou apagar
+    //router.get('/user', auth, user.list); //rota de teste -> vou apagar
+    router.post('/user/login', user.login); //Logar cliente
+    router.get('/user/orders/:userId', auth, user.listOrdersUser); //Listar pedidos de um cliente Ok --> usando Query Builder
 
     //Rotas do PRODUCT
-    router.post('/product', product.createProduct);//Criar produto ---> será apagada, usar migration
+ //   router.post('/product', product.createProduct);//Criar produto ---> será apagada, usar migration
     router.get('/product', product.listProduct);//Listar produto Ok
 
     //Rotas do STORE
     router.get('/store', store.listStore); //Listar lojas Ok
 
     //Rotas do ORDER
-    router.post('/order/:userId', order.createOrder); //FINALIZAR COMPRAR Esta criando 1 order e adicionado os itens - OK
-    router.get('/order/user/:userId', user.listOrdersUser); //Listar pedidos de um cliente Ok --> usando Query Builder
+    router.post('/order/:userId', auth, order.createOrder); //FINALIZAR COMPRAR Esta criando 1 order e adicionado os itens - OK
+    router.put('/order/checkout', order.checkout)
+
     router.post('/item', order.addItem);//Adicionar produtos na lista de pedido de um cliente
     router.delete('/item/:productId', order.removeItem);//Remover produto da lista de pedido de um cliente
 
