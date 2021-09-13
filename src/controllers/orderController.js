@@ -52,7 +52,7 @@ const checkout = async (req, res) => {
 
     const order = await conn.getRepository(Order).findOne(orderId)
 
-    order.status = 'finalizado'
+    order.status = 'Realizada'
 
     await conn.getRepository(Order).save(order);
 
