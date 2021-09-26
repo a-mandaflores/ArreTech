@@ -26,7 +26,7 @@ module.exports = new EntitySchema({
         }
     },
     relations: {
-        orders: {
+        order: {
             target: "Order", // OrderEntity
             type: "one-to-many",
             inverseSide: "user" //*muito importante! traz consistencia na relação (é um alias q referencia a userId em order)

@@ -58,7 +58,7 @@ A **API omni channel** tem como funcionalidade suprir a necessidade de aplicar r
 # 🛠 Instalação e configuração
 ## Pré-requisitos:
 
-É necessário instalar [MySql](https://dev.mysql.com/downloads/installer/) versão 8.0, [NodeJS](https://nodejs.org/pt-br/download/) versão14.17.6 e [Git](http://git-scm.com/downloads) versão 2.33.0 para a instalação do projeto. <br>
+É necessário instalar um IDE(Ambiente de desenvolvimento integrado) [VS Code](https://code.visualstudio.com/download), o [MySql](https://dev.mysql.com/downloads/installer/) versão 8.0, o [NodeJS](https://nodejs.org/pt-br/download/) versão14.17.6 e [Git](http://git-scm.com/downloads) versão 2.33.0 para a instalação do projeto. <br>
 (_os links apresentados para download são válidos em 13/09/2021_)
 
 <br> 
@@ -77,13 +77,36 @@ Instalar as dependências:
 ```bash
 $ yarn install
 ```
-Iniciar projeto:
+Criar, através de seu gerenciador do mysql, o seguinte banco de dados:
+
+```bash
+db_arretech
+```
+
+Iniciar projeto, atualizar o swagger e subir as migrations:
 
 ```bash
 $ yarn start
 ```
+<br>
+
+# ✔ Acesso ao swagger:
+
+Após a instalação e configuração, se tudo estiver correto, aparecerá uma mensagem conforme a seguinte imagem:
+
+<img src= "https://user-images.githubusercontent.com/72309611/133140847-f4dbcf0b-3b8d-4749-90a4-22b3bda24538.png"
+width='350px'>
+
+E então, será possivel acessar o Swagger através do link:
+> http://localhost:3000/doc
 
 <br>
+
+
+
+
+
+
 
 # 📂 Arquitetura
 
@@ -107,10 +130,10 @@ Apesar de aumentar a configuração inicial, essa arquitetura irá garantir faci
    |    |- 📁 data
    |         |- 📁 migrations
    |              |- 📄 1631534253127-tableProduct.js
-                  |- 📄 1631536530354-tableUser.js
-                  |- 📄 1631536822918-tableStore.js
-                  |- 📄 1631538116639-tableOrder.js
-                  |- 📄 1631538823893-tableOrderItem.js
+   |              |- 📄 1631536530354-tableUser.js
+   |              |- 📄 1631536822918-tableStore.js
+   |              |- 📄 1631538116639-tableOrder.js
+   |              |- 📄 1631538823893-tableOrderItem.js
    |         |- 📄 database.js
    |
    |    |- 📁 entities
@@ -121,16 +144,16 @@ Apesar de aumentar a configuração inicial, essa arquitetura irá garantir faci
    |         |- 📄 userEntity.js
    |
    |    |- 📁 routes
-   |         |- 📄 indexRoute.js
-   |         |- 📄 orderRoute.js
-   |         |- 📄 productRoute.js
-   |         |- 📄 storeRoute.js
-   |         |- 📄 userRoute.js
+   |         |- 📄 itemRouter.js
+   |         |- 📄 orderRouter.js
+   |         |- 📄 productRouter.js
+   |         |- 📄 storeRouter.js
+   |         |- 📄 userRouter.js
    | 
-        |- 📄 app.js
-        |- 📄 jwtauth.js
-        |- 📄 swagger_output.json
-        |- 📄 swagger.js
+   |     |- 📄 app.js
+   |     |- 📄 jwtauth.js
+   |     |- 📄 swagger_output.json
+   |     |- 📄 swagger.js
    |     
    |- 📄 .env
    |- 📄 .env.example
@@ -193,6 +216,8 @@ POST http://localhost:3000/order/checkout
 
 <br>
 <br>
+
+Enfim, chegamos ao final do README.md e deixamos nossos agradecimentos a iniciativa do programa Luiza Code no incentivo a inserção de mais mulheres na tecnologia. E também agradecemos á toda equipe do Gama Academy pelo cuidado e carinho com a transmissão do conteúdo durante toda a aceleração.
 
  ### criado por 💜 ArreTech
 

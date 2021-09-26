@@ -2,6 +2,7 @@
 const conn = require('../data/database')
 const Order = require('../entities/orderEntity')
 const Product = require('../entities/productEntity')
+const User = require('../entities/userEntity')
 
 var items = []
 var orderId = 0
@@ -14,9 +15,9 @@ const createOrder = async (req, res) => {
        "apiKeyAuth": []
     }] */
 
-    const { userId } = req.params
+    const { userId } = req.params;
 
-    //  var user = userId
+    var user = userId
 
     var amount = 0
 
@@ -24,22 +25,19 @@ const createOrder = async (req, res) => {
         amount += items[i].totalPrice;
     }
 
-    var status = "aberto" //default, após checkout modificar para realizado
-
-    //status pedido: realizado, retirado, negado, desistiu da compra
+    var status = "em analise" //default, após checkout modificar para realizado
 
     //var dateFormat =  Date.now() //saída desejada date : 'dd/MM/yyyy HH:mm';
 
-    var newOrder = { userId, amount, status, items }
+    var newOrder = { user, amount, status, items }
 
-    const order = await conn.getRepository(Order).save(newOrder);
+    await conn.getRepository(Order).save(newOrder);
 
-    orderId = order.id
+    //status compra: realizada, retirada, negada, desistiu da compra ()
 
-    res.status(201).json({ order: order });
-
+    res.status(201).json({ order: newOrder });
+    
     items.length = 0; //limpa o array de items do pedido
-
 }
 const checkout = async (req, res) => {
 

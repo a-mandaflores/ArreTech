@@ -1,12 +1,8 @@
 const express = require('express');
 const http = require('http')
 
-//const routes = require('./src/routes/indexRoute');
-
 const swaggerUI = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
-
-//const db = require("./src/data"); //outra forma de escrever a linha 11
 
 require('./data/database');
 
@@ -18,7 +14,12 @@ app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerFile))
 
 app.use(express.json()); //informa para usar requisições e responses em formato Json
 
-require('./routes')(app)
+//require('./routes')(app)
+require('./routes/userRouter')(app)
+require('./routes/productRouter')(app)
+require('./routes/storeRouter')(app)
+require('./routes/itemRouter')(app)
+require('./routes/orderRouter')(app)
 
 try {
     http.createServer(app).listen(PORT)
@@ -27,7 +28,3 @@ try {
     console.log(err)
 }
 
-//app.use(routes);
-
-
-//app.listen(PORT, () => console.log(`Servidor em pleno funcionamento na porta ${PORT}`));
