@@ -15,47 +15,29 @@ const createOrder = async (req, res) => {
        "apiKeyAuth": []
     }] */
 
-    const { userId } = req.params
+    const { userId } = req.params;
 
-    const user = await conn.getRepository(User).findOne(userId)
+    var user = userId
 
-    if (user != null && user != undefined) {
-        var amount = 0
+    var amount = 0
 
-        if (items.length != 0) {
-            for (var i = 0; i < items.length; i++) {
-                amount += items[i].totalPrice;
-            }
-
-            var status = "aberto" //default, após checkout modificar para realizado
-
-            //status pedido: realizado, retirado, negado, desistiu da compra
-
-            //var dateFormat =  Date.now() //saída desejada date : 'dd/MM/yyyy HH:mm';
-
-            var newOrder = { userId, amount, status, items }
-
-            const order = await conn.getRepository(Order).save(newOrder);
-
-            orderId = order.id
-
-            res.status(201).json({ order: order });
-
-            items.length = 0; //limpa o array de items do pedido
-
-
-        } else {
-
-            res.status(404).send('items array is empty')
-        }
-
-    } else {
-        res.status(400).send('unregistered user')
+    for (var i = 0; i < items.length; i++) {
+        amount += items[i].totalPrice;
     }
 
+    var status = "em analise" //default, após checkout modificar para realizado
 
+    //var dateFormat =  Date.now() //saída desejada date : 'dd/MM/yyyy HH:mm';
 
+    var newOrder = { user, amount, status, items }
 
+    await conn.getRepository(Order).save(newOrder);
+
+    //status compra: realizada, retirada, negada, desistiu da compra ()
+
+    res.status(201).json({ order: newOrder });
+    
+    items.length = 0; //limpa o array de items do pedido
 }
 const checkout = async (req, res) => {
 

@@ -66,7 +66,7 @@ const listOrdersUser = async (req, res) => {
         "apiKeyAuth": []
     }] */
 
-    const { userId } = req.params;
+    const { userId } = req.params
 
     //---- FUNCIONANDO APRESENTA OS DADOS DO USUÁRIO EM CIMA ---------------
   /*  const userOrders = await conn.getRepository(User)
@@ -82,7 +82,7 @@ const listOrdersUser = async (req, res) => {
         .getMany(); */
 
     const userR = conn.getRepository(User);
-    const user = await userR.findOne(userId, { relations: ["orders"] });
+    const user = await userR.findOne(userId, { relations: ["order"] });
 
     //res.status(200).json([user, { orders: orders }])
     res.status(200).json([user])
